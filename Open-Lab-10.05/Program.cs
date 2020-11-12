@@ -1,127 +1,146 @@
 ﻿using System;
+using System.Collections.Generic;
 
 
-namespace Open_Lab_10._01
+namespace Open_Lab_10._05
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Book LOTR = new Book("Creative name of book", -100, "encyclopedia", "Jaro", 2020);
-
-            Book LOTR2 = new Book("Another creative name of book", 25);
-
-            Book LOTR3 = new Book();
-
-            Book HOBIT = new Book("HOBIT", 310, "fantasy", "Tolkien", 2020);
-
-            LOTR.GetBook();
-
-            LOTR2.GetBook();
-
-            LOTR3.GetBook();
-
-            HOBIT.GetBook();
-
+            Book LOTR = new Book("The Two Towers", 415, "Fantasy", "J.R.R. Tolkien", 2012);
+        
+            Book LOTR2 = new Book();
+            
+            Book LOTR3 = new Book("Brief Answers to the Big Questions", 256);
+            
+            Book HOBIT = new Book("Hobbit", 310, "Fantasy", "J.R.R. Tolkien", 1937);
+            
+            {
+                Category = Book.categoryList[4];
+            }
+            
+            LOTR.PrintBookInfo();
+            
+            LOTR2.PrintBookInfo();
+            
+            LOTR3.PrintBookInfo();
+            
+            HOBIT.PrintBookInfo();
+            
             Console.ReadKey();
         }
     }
     class Book
     {
-        private string title;
 
+        private string empty = ", ";
+        
         private int pages;
-
+        
+        private string title;
+        
         private string category;
-
+        
         private string author;
-
+        
         private int releaseDate;
+        /// List of available categories.
+        public static List<string> categoryList = new List<string>();
 
-        public Book(string title, int pages, string category, string author, int releaseDate)
-
+        public Book(string ttl, int pgs, string ctgr, string athr, int dt)
         {
-
-
-            Title = title;
-
-            Pages = pages;
-
-            Category = category;
-
-            Author = author;
-
-            ReleaseDate = releaseDate;
+            
+            title = ttl;
+            
+            pages = pgs;
+            
+            category = ctgr;
+            
+            author = athr;
+            
+            releaseDate = dt;
+            
+            categoryList.Add("for kids");
+            
+            categoryList.Add("romantic");
+            
+            categoryList.Add("educational");
+            
+            categoryList.Add("sci-fi");
+            
+            categoryList.Add("adventure");
         }
 
-        public Book(string title, int pages)
-
-        {
-            Title = title;
-
-            Pages = pages;
-
-            Category = "-1";
-
-            Author = "-1";
-
-            ReleaseDate = -1;
-
-        }
         public Book()
-
         {
-            Title = "-1";
-
-            Pages = -1;
-
-            Category = "-1";
-
-            Author = "-1";
-
-            ReleaseDate = -1;
-
+            
+            title = "-1";
+            
+            pages = -1;
+            
+            category = "-1";
+            
+            author = "-1";
+            
+            releaseDate = -1;
+        }
+        public Book(string ttl, int pgs)
+        {
+            title = ttl;
+            
+            pages = pgs;
+            
+            category = "-1";
+            
+            author = "-1";
+            
+            releaseDate = -1;
         }
 
+        /// Property, that set up a title of book.
         public string Title
-
         {
             get => this.title;
-
             set
-
+            
             {
                 this.title = value;
             }
-
         }
 
+        /// Property, that set up a number of pages in book.
         public int Pages
         {
             get => this.pages;
             set
+            
             {
+                
                 this.pages = value;
                 if (this.pages < 0)
-               
+            
                 {
                     this.pages = 1;
                 }
             }
         }
 
+        /// Property, that set up a category of book.
         public string Category
         {
-            get => this.category;
+            
             set
-           
+            
             {
                 this.category = value;
             }
         }
 
+        /// Property, that set up an author of book.
         public string Author
         {
+            
             get => this.author;
             set
             
@@ -130,23 +149,24 @@ namespace Open_Lab_10._01
             }
         }
 
+        /// Property, that set up release date of book.
         public int ReleaseDate
         {
             get => this.releaseDate;
             set
-            
             {
+                
                 this.releaseDate = value;
                 if ((this.releaseDate > 2021) || (this.releaseDate < 1450))
-            
+ 
                 {
                     this.releaseDate = -1;
                 }
             }
         }
-        public void GetBook()
+        public void PrintBookInfo()
         {
-            Console.WriteLine(String.Format($"{title} , {pages} , {category} , {author} , {releaseDate}"));
+            Console.WriteLine(author + empty + title + empty + pages + empty + category + empty + releaseDate);
         }
     }
 }
